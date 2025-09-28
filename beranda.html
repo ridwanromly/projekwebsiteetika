@@ -11,6 +11,107 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .container {
+          width: 100%;
+          padding: 140px 1rem;
+        }
+      
+        .content-1-boxes {
+          flex-wrap: wrap;
+          gap: 2rem;
+          justify-content: center;
+        }
+      
+        .content-2-box {
+          flex-direction: column;
+        }
+      
+        .tips-list {
+          margin: 1rem 0;
+        }
+      
+        .content-3-boxes {
+          flex-direction: column;
+          gap: 2rem;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+          padding: 1rem;
+        }
+      
+        .header-logo img {
+          width: 100px;
+        }
+      
+        .container {
+          padding: 120px 1rem;
+        }
+      
+        h2 {
+          font-size: 1.3rem;
+          text-align: center;
+        }
+      
+        .content-1-box h4 {
+          font-size: 1rem;
+          text-align: center;
+        }
+      
+        .card {
+          padding: 1rem;
+        }
+      
+        .btn-penilaian {
+          padding: 1rem 2rem;
+          font-size: 0.9rem;
+        }
+      
+        .deskripsi {
+          font-size: 0.8rem;
+          text-align: center;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        body {
+          height: auto;
+        }
+      
+        header h1 {
+          font-size: 1.1rem;
+        }
+      
+        header p {
+          font-size: 0.8rem;
+        }
+      
+        .header-logo img {
+          width: 80px;
+        }
+      
+        .content-1-boxes {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+      
+        .tips-list li {
+          font-size: 0.85rem;
+        }
+      
+        .btn-penilaian {
+          width: 100%;
+          padding: 1rem;
+        }
+      }
+
+      /* Tampilan Desktop */
       body {
         height: 900px;
         display: flex;
@@ -339,3 +440,4 @@
     </div>
   </body>
 </html>
+
