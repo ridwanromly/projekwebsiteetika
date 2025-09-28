@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        height: 900px;
+        display: flex;
+        justify-content: center;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background-image: linear-gradient(
+          to right,
+          rgb(0, 142, 155),
+          rgb(82, 179, 164)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 1rem 3rem;
+      }
+
+      .header-text {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .header-text h1 {
+        font-weight: bold;
+      }
+
+      .header-logo img {
+        width: 130px;
+      }
+
+      .container {
+        height: 100%;
+        width: 1368px;
+        padding: 162px 2rem;
+
+      }
+
+      .content-1, .content-2, .content-3 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 5rem;
+      }
+
+      /* Content 1 */
+      .content-1 {
+        margin-top: 1rem;
+      }
+      
+      .content-1-boxes {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .content-1-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .border {
+        border: 2px solid black;
+        border-radius: 20px;
+        margin-top: 1rem;
+        transition: all .2s ease-in;
+      }
+
+      .border-blue:hover {
+        background-color: #00bef7;
+      }
+
+      .border-blue img:hover {
+        filter: invert(100%);
+      }
+
+      .border-red:hover {
+        background-color: #e81c34;
+      }
+
+      .border-red img:hover {
+        filter: invert(100%);
+      }
+
+      .border-yellow:hover {
+        background-color: #fff700;
+      }
+
+      .border-yellow img:hover {
+        filter: invert(100%);
+      }
+
+      .border-green:hover {
+        background-color: #3cb54a;
+      }
+
+      .border-green img:hover {
+        filter: invert(100%);
+      }
+
+      .border:hover {
+        transform: scale(1.1);
+        transition: all .2s ease-out;
+      }
+
+      .border img {
+        padding: 2rem;
+        animation: up-down 2s ease-in-out infinite;
+      }
+
+      @keyframes up-down {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+      }
+
+      /* Content 2 */
+      .content-2-box {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .card {
+        flex: 1;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all .2s ease-in;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+        transition: all .2s ease-out;
+      }
+
+      .card-green {
+        background: #e7f7f5;
+        border-left: 6px solid #00a78e;
+      }
+
+      .card-blue {
+        background: #f0f9fb;
+        border-left: 6px solid #007a99;
+      }
+
+      .card h3 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .card ol {
+        padding-left: 1.2rem;
+      }
+
+      /* Content 3 */
+      .content-3-boxes {
+        display: flex;
+        align-items: center;
+      }
+
+      .tips-list {
+        list-style: none;
+        margin: 1rem 22rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .tips-list img {
+        width: 30px;
+      }
+
+      .tips-list li {
+        display: flex;
+        align-items: center; 
+        gap: 0.5rem;
+      }
+
+
+      .btn-penilaian {
+        background-color: #00a78e;
+        border: 2px solid black;
+        border-radius: 50px;
+        box-shadow: 0 7px black;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+        padding: 1.5rem 4rem;
+        text-decoration: none;
+        text-align: center;
+        transition: all .3s ease-out;
+      }
+
+      .btn-penilaian:hover {
+        background-color: #008f78;
+        box-shadow: 0 10px black;
+        transform: translateY(-3px);
+      }
+
+      .btn-penilaian:active {
+        box-shadow: 0 0 black;
+        transform: translateY(7px);
+        transition: all 0.1s ease-in;
+      }
+
+      .deskripsi {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+    </style>
+  </head>
+  <body>
+    
+        <!-- Header -->
+      <header class="header">
+        <div class="header-text">
+          <h1>Ruang Etika Information Technology (IT)</h1>
+          <p>Temukan kompas moral anda dalam dunia IT</p>
+        </div>
+        <div class="header-logo">
+          <img src="img/logo.png" alt="logo" />
+        </div>
+      </header>
+
+      <div class="container">
+        <!-- Content 1 -->
+        <div class="content-1">
+          <h2>Prinsip-prinsip Etika Dasar</h2>
+            <div class="content-1-boxes">
+              <!-- Box 1 -->
+              <div class="content-1-box">
+                <div class="border border-blue">
+                  <img src="img/Integrasi.png" alt="Integrasi">
+                </div>
+                  <h4>Integrasi & Kejujuran</h4>
+              </div>
+              <!-- Box 2 -->
+              <div class="content-1-box">
+                <div class="border border-red">
+                  <img src="img/Privasi.png" alt="Privasi">
+                </div>
+                  <h4>Privasi & Keamanan</h4>
+              </div>
+              <!-- Box 3 -->
+              <div class="content-1-box">
+                <div class="border border-yellow">
+                  <img src="img/Keadilan.png" alt="Keadilan">
+                </div>
+                  <h4>Keadilan & Kesetaraan</h4>
+              </div>
+              <!-- Box 4 -->
+              <div class="content-1-box">
+                <div class="border border-green">
+                  <img src="img/Kekayaan.png" alt="Kekayaan">
+                </div>
+                  <h4>Kekayaan Intelektual</h4>
+              </div>
+            </div>
+        </div>
+
+        <!-- Content 2 -->
+        <div class="content-2">
+          <h2>Contoh Konkret</h2>
+          <div class="content-2-box">
+            <!-- Kode Etis -->
+            <div class="card card-green">
+              <h3>Kode Etis ✔</h3>
+              <ol>
+                <li>Menjaga keamanan dan privasi data pengguna, tidak menyalahgunakan informasi pribadi.</li>
+                <li>Menghargai hak cipta dan lisensi, menggunakan aset digital sesuai izin.</li>
+                <li>Memberikan informasi jujur tentang kemampuan, progres, dan biaya proyek.</li>
+                <li>Tidak mengubah konfigurasi jaringan tanpa izin dan menjaga stabilitas serta keamanan jaringan.</li>
+              </ol>
+            </div>
+            <!-- Kode Tidak Etis -->
+            <div class="card card-blue">
+              <h3>Kode Tidak Etis ✘</h3>
+              <ol>
+                <li>Membocorkan data pribadi pengguna atau perusahaan tanpa izin.</li>
+                <li>Menggunakan software bajakan atau menjiplak karya orang lain.</li>
+                <li>Memberikan informasi palsu kepada klien terkait kemampuan atau waktu pengerjaan.</li>
+                <li>Mengubah konfigurasi jaringan tanpa izin dan merusak sistem atau data.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content 3 -->
+        <div class="content-3">
+          <h2>Tips Penerapan Etika</h2>
+          <div class="content-3-boxes">
+            <div class="content-3-box">
+              <ul class="tips-list">
+                <li><img src="img/ceklis.png" alt="ceklis"> Jaga Keamanan dan Privasi.</li>
+                <li><img src="img/ceklis.png" alt="ceklis"> Hormati Hak Kekayaan Intelektual.</li>
+                <li><img src="img/ceklis.png" alt="ceklis"> Komunikasi yang Jujur dan Transparan.</li>
+                <li><img src="img/ceklis.png" alt="ceklis"> Dokumentasi dan Penanganan Error.</li>
+              </ul>
+            </div>
+
+            <div class="content-3-box">
+              <!-- Tombol Penilaian -->
+              <a href="quiz.html" class="btn-penilaian">Penilaian Diri</a>
+              <p class="deskripsi">Klik tombol <b>"Penilaian Diri"</b> untuk mengukur dan<br>membuktikan kompetensi Anda secara objektif.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

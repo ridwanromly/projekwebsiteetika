@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Diri - Etika IT</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        height: 900px;
+        display: flex;
+        justify-content: center;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background-image: linear-gradient(
+          to right,
+          rgb(0, 142, 155),
+          rgb(82, 179, 164)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 1rem 3rem;
+      }
+
+      .header-text {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .header-text h1 {
+        font-weight: bold;
+      }
+
+      .header-logo img {
+        width: 130px;
+      }
+
+      .container {
+        height: 100%;
+        width: 1368px;
+        padding: 162px 2rem 80px 2rem;
+      }
+
+      .content-1, .content-2, .content-3 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 5rem;
+      }
+
+      /* Content 1 */
+      .content-1 {
+        margin-top: 1rem;
+      }
+      
+      .content-1-boxes {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .content-1-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .border {
+        border: 2px solid black;
+        border-radius: 20px;
+        margin-top: 1rem;
+        transition: all .2s ease-in;
+      }
+
+      .border img {
+        padding: 2rem;
+        animation: up-down 2s ease-in-out infinite;
+      }
+
+      @keyframes up-down {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+      }
+
+      .border:hover {
+        transform: scale(1.1);
+        transition: all .2s ease-out;
+      }
+
+      /* Content 2 */
+      .content-2-box {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .card {
+        flex: 1;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all .2s ease-in;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+        transition: all .2s ease-out;
+      }
+
+      .card-green {
+        background: #e7f7f5;
+        border-left: 6px solid #00a78e;
+      }
+
+      .card-blue {
+        background: #f0f9fb;
+        border-left: 6px solid #007a99;
+      }
+
+      .card h3 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .card ol {
+        padding-left: 1.2rem;
+      }
+
+      /* Content 3 */
+      .content-3-boxes {
+        display: flex;
+        align-items: center;
+      }
+
+      .tips-list {
+        list-style: none;
+        margin: 1rem 22rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .tips-list img {
+        width: 30px;
+      }
+
+      .tips-list li {
+        display: flex;
+        align-items: center; 
+        gap: 0.5rem;
+      }
+
+      .btn-penilaian {
+        background-color: #00a78e;
+        border: 2px solid black;
+        border-radius: 50px;
+        box-shadow: 0 5px black;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+        padding: 1.5rem 4rem;
+        text-decoration: none;
+        text-align: center;
+        transition: all .3s ease-out;
+      }
+
+      .btn-penilaian:hover {
+        background-color: #008f78;
+      }
+
+      .btn-penilaian:active {
+        box-shadow: 0 0 black;
+        transform: translateY(7px);
+        transition: all 0.1s ease-in;
+      }
+
+      .deskripsi {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: #555;
+      }
+      
+      /* Quiz Specific Styles */
+      .quiz-container {
+        display: none;
+        margin-bottom: 50px;
+      }
+
+      .quiz-container.active {
+        display: block;
+      }
+
+      .quiz-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 15px;
+        border-left: 6px solid #00a78e;
+      }
+
+      .quiz-header h2 {
+        color: #2c3e50;
+        font-size: 28px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .quiz-header p {
+        color: #7f8c8d;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      /* Question Styles */
+      .question {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-left: 5px solid #00a78e;
+        transition: all 0.3s ease;
+      }
+
+      .question:hover {
+        box-shadow: 0 4px 15px rgba(0, 167, 142, 0.1);
+      }
+
+      .question h3 {
+        color: #2c3e50;
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .question-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .option:hover {
+        background: #e8f4fd;
+        border-color: #00a78e;
+        transform: translateX(5px);
+      }
+
+      .option input[type="radio"] {
+        margin-right: 12px;
+        width: 20px;
+        height: 20px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .option input[type="radio"]:checked {
+        background: #00a78e;
+        border-color: #00a78e;
+      }
+
+      .option input[type="radio"]:checked::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .option label {
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1.4;
+        color: #2c3e50;
+      }
+
+      /* Quiz Navigation */
+      .quiz-navigation {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 80px;
+        padding-top: 30px;
+        padding-bottom: 40px;
+      }
+
+      .quiz-btn {
+        background: linear-gradient(135deg, #00a78e, #008f78);
+        color: white;
+        border: 2px solid black;
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px black;
+      }
+
+      .quiz-btn:hover {
+        background: linear-gradient(135deg, #008f78, #00a78e);
+        transform: translateY(-2px);
+        box-shadow: 0 7px black;
+      }
+
+      .quiz-btn:active {
+        box-shadow: 0 0 black;
+        transform: translateY(5px);
+        transition: all 0.1s ease-in;
+      }
+
+      /* Results Container Styles */
+      .results-container {
+        background: white;
+        border-radius: 15px;
+        padding: 60px 50px;
+        margin-bottom: 50px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        display: none;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 15px;
+      }
+
+      .results-container.active {
+        display: block;
+      }
+
+      .results-container.competent {
+        border-left: 6px solid #00a78e;
+      }
+
+      .results-container.not-competent {
+        border-left: 6px solid #e74c3c;
+      }
+
+      .results-content {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .results-left {
+        flex: 1;
+      }
+
+      .results-left h2 {
+        color: #2c3e50;
+        font-size: 20px;
+        font-weight: normal;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+
+      .results-message {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: left;
+        margin: 0;
+      }
+
+      .results-separator {
+        font-size: 60px;
+        color: #2c3e50;
+        font-weight: 300;
+        margin: 0 30px;
+      }
+
+      .results-right {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .score-section {
+        text-align: center;
+      }
+
+      .score-label {
+        font-size: 16px;
+        color: #7f8c8d;
+        font-weight: normal;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .results-score {
+        font-size: 32px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin: 0;
+      }
+
+      .back-btn {
+        background: #00a78e;
+        color: white;
+        border: 2px solid black;
+        box-shadow: 0 7px black;
+        padding: 18px 36px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        min-width: 220px;
+        text-align: center;
+      }
+
+      .back-btn:hover {
+        background: #008f78;
+        box-shadow: 0 10px black;
+        transform: translateY(-3px);
+      }
+
+      .back-btn:active {
+        box-shadow: 0 0;
+        transform: translateY(7px);
+        transition: all 0.1s ease-in;
+      }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-text">
+            <h1>Ruang Etika Information Technology (IT)</h1>
+            <p>Temukan kompas moral anda dalam dunia IT</p>
+        </div>
+        <div class="header-logo">
+            <img src="img/logo.png" alt="logo" />
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Quiz Container -->
+        <div id="quizContainer" class="quiz-container active">
+            <div class="quiz-header">
+                <h2>DAFTAR PERIKSA</h2>
+                <p>Jawablah semua pertanyaan di bawah ini dengan memilih salah satu jawaban yang paling tepat, lalu klik tombol "Selesai" untuk melihat hasil Anda.</p>
+            </div>
+
+            <div id="questionsContainer">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+
+            <div class="quiz-navigation">
+                <button class="quiz-btn" onclick="submitQuiz()">Selesai</button>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="resultsContainer" class="results-container">
+            <div class="results-content">
+                <div class="results-left">
+                    <h2>DAFTAR PERIKSA SELESAI.</h2>
+                    <div id="resultsMessage" class="results-message"></div>
+                </div>
+                
+                <div class="results-separator">|</div>
+                
+                <div class="results-right">
+                    <div class="score-section">
+                        <span class="score-label">SKOR</span>
+                        <div id="resultsScore" class="results-score"></div>
+                    </div>
+                    <button class="back-btn" onclick="backToHome()">Kembali Ke Beranda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Questions Data
+        const quizQuestions = [
+            {
+                id: 1,
+                question: "Seorang programmer menemukan celah keamanan kritis dalam aplikasi yang ia kembangkan. Apa tindakan etis yang harus diambilnya?",
+                options: [
+                    "Memberi tahu atasan dan mendesak untuk segera membuat rencana perbaikan yang transparan.",
+                    "Membocorkan informasi celah keamanan kepada media sosial agar publik tahu.",
+                    "Merahasiakan celah tersebut untuk menghindari kepanikan publik.",
+                    "Secara diam-diam memperbaiki celah tersebut tanpa memberitahu siapa pun."
+                ],
+                correctAnswer: 0
+            },
+            {
+                id: 2,
+                question: "Anda sedang mengembakan aplikasi seluler yang mengumpulkan data lokasi pengguna. Untuk tujuan apa data ini etis untuk digunakan?",
+                options: [
+                    "Menggunakan data lokasi untuk mempersonalisasi fitur aplikasi yang disetujui pengguna (misalnya, untuk mencari restoran terdekat).",
+                    "Menggunakan data lokasi untuk menampilkan iklan yang relevan tanpa memberitahu pengguna.",
+                    "Menjual data lokasi pengguna kepada pihak ketiga tanpa persetujuan eksplisit.",
+                    "Menyimpan data lokasi pengguna secara permanen dan tidak terenkripsi."
+                ],
+                correctAnswer: 0
+            },
+            {
+                id: 3,
+                question: "Seorang programmer menulis algoritman untuk seleksi lamaran kerja. Ia menyadari algoritma tersebut cenderung memprioritaskan kandidat laki-laki. Apa yang harus dilakukan?",
+                options: [
+                    "Mengubah algoritma secara manual untuk memastikan proporsi laki-laki dan perempuan sama, tanpa mempertimbangkan kualifikasi.",
+                    "Menghapus algoritma tersebut dan kembali menggunakan metode seleksi manual.",
+                    "Mengabaikan masalah tersebut karena algoritma bekerja sesuai dengan data yang ada.",
+                    "Memperbaiki algoritma agar lebih adil dan transparan tanpa memandang gender."
+                ],
+                correctAnswer: 3
+            },
+            {
+                id: 4,
+                question: "Anda menemukan sebuah pustaka (library) *open-source* yang sangat berguna untuk proyek Anda, tetapi lisensinya mengharuskan Anda untuk mempublikasikan kode sumber Anda sendiri. Tim Anda ingin merahasiakan kode sumber proyek. Tindakan etis apa yang harus diambil?",
+                options: [
+                    "Membujuk tim untuk mempublikasikan kode sumber mereka sebagai bentuk kontribusi kepada komunitas.",
+                    "Menulis ulang pustaka tersebut dari awal untuk menghindari masalah lisensi.",
+                    "Mencari pustaka alternatif dengan lisensi yang sesuai dengan kebutuhan proyek Anda.",
+                    "Menggunakan pustaka tersebut secara diam-diam dan tidak mempublikasikan kode sumber Anda."
+                ],
+                correctAnswer: 2
+            },
+            {
+                id: 5,
+                question: "Perusahaan meminta Anda untuk menambahkan fitur yang menipu pengguna agar berlangganan secara tidak sengaja. Apa yang harus Anda lakukan?",
+                options: [
+                    "Melaksanakan tugas tersebut tetapi menambahkan peringatan kecil pada fitur tersebut.",
+                    "Menolak perintah dan menjelaskan konsekuensi etis serta dampak negatifnya terhadap kepercayaan pengguna.",
+                    "Mengundurkan diri dari pekerjaan tanpa memberitahu siapa pun.",
+                    "Melaksanakan perintah tersebut karena itu adalah tugas Anda sebagai karyawan."
+                ],
+                correctAnswer: 1
+            }
+        ];
+
+        // Global Variables
+        let currentQuiz = [];
+        let userAnswers = {};
+
+        // Initialize Quiz when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeQuiz();
+        });
+
+        // Initialize Quiz Function
+        function initializeQuiz() {
+            currentQuiz = [...quizQuestions];
+            userAnswers = {};
+            renderQuestions();
+            showQuizContainer();
+        }
+
+        // Render Questions
+        function renderQuestions() {
+            const questionsContainer = document.getElementById('questionsContainer');
+            questionsContainer.innerHTML = '';
+
+            currentQuiz.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                
+                questionDiv.innerHTML = `
+                    <h3>${index + 1}. ${question.question}</h3>
+                    <div class="question-options">
+                        ${question.options.map((option, optionIndex) => `
+                            <div class="option" onclick="selectAnswer(${question.id}, ${optionIndex})">
+                                <input type="radio" 
+                                       id="q${question.id}_option${optionIndex}" 
+                                       name="question${question.id}" 
+                                       value="${optionIndex}">
+                                <label for="q${question.id}_option${optionIndex}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        // Select Answer Function
+        function selectAnswer(questionId, answerIndex) {
+            userAnswers[questionId] = answerIndex;
+            
+            // Update radio button
+            const radioButton = document.getElementById(`q${questionId}_option${answerIndex}`);
+            if (radioButton) {
+                radioButton.checked = true;
+            }
+            
+            // Update visual feedback
+            const questionDiv = document.querySelector(`input[name="question${questionId}"]`).closest('.question');
+            const options = questionDiv.querySelectorAll('.option');
+            
+            options.forEach((option, index) => {
+                option.style.background = index === answerIndex ? '#e8f4fd' : 'white';
+                option.style.borderColor = index === answerIndex ? '#00a78e' : 'transparent';
+            });
+        }
+
+        // Submit Quiz Function
+        function submitQuiz() {
+            // Check if all questions are answered
+            const totalQuestions = currentQuiz.length;
+            const answeredQuestions = Object.keys(userAnswers).length;
+            
+            if (answeredQuestions < totalQuestions) {
+                alert('Mohon jawab semua pertanyaan sebelum menyelesaikan quiz.');
+                return;
+            }
+            
+            // Calculate score
+            const score = calculateScore();
+            
+            // Show results
+            showResults(score, totalQuestions);
+        }
+
+        // Calculate Score Function
+        function calculateScore() {
+            let correctAnswers = 0;
+            
+            currentQuiz.forEach(question => {
+                const userAnswer = userAnswers[question.id];
+                if (userAnswer === question.correctAnswer) {
+                    correctAnswers++;
+                }
+            });
+            
+            return correctAnswers;
+        }
+
+        // Show Results Function
+        function showResults(score, total) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const quizContainer = document.getElementById('quizContainer');
+            const resultsMessage = document.getElementById('resultsMessage');
+            const resultsScore = document.getElementById('resultsScore');
+            
+            // Hide quiz, show results
+            quizContainer.classList.remove('active');
+            resultsContainer.classList.add('active');
+            
+            // Auto-scroll to top smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Set score
+            resultsScore.textContent = `${score}/${total}`;
+            
+            // Set message and border color based on score
+            const percentage = (score / total) * 100;
+            
+            // Remove existing competency classes
+            resultsContainer.classList.remove('competent', 'not-competent');
+            
+            if (percentage >= 70) {
+                resultsMessage.textContent = 'SELAMAT, ANDA KOMPETEN!';
+                resultsContainer.classList.add('competent');
+            } else {
+                resultsMessage.textContent = 'MOHON MAAF, ANDA BELUM KOMPETEN!';
+                resultsContainer.classList.add('not-competent');
+            }
+        }
+
+        // Show Quiz Container
+        function showQuizContainer() {
+            const quizContainer = document.getElementById('quizContainer');
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            quizContainer.classList.add('active');
+            resultsContainer.classList.remove('active');
+        }
+
+        // Back to Home Function
+        function backToHome() {
+            window.location.href = 'beranda.html';
+        }
+
+        // Retry Quiz Function
+        function retryQuiz() {
+            // Reset quiz state
+            userAnswers = {};
+            
+            // Reset all radio buttons
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Reset option styling
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.style.background = 'white';
+                option.style.borderColor = 'transparent';
+            });
+            
+            // Show quiz container
+            showQuizContainer();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Utility function to get quiz statistics
+        function getQuizStatistics() {
+            return {
+                totalQuestions: currentQuiz.length,
+                answeredQuestions: Object.keys(userAnswers).length,
+                score: calculateScore(),
+                percentage: (calculateScore() / currentQuiz.length) * 100
+            };
+        }
+    </script>
+</body>
+</html>
